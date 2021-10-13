@@ -20,7 +20,7 @@ mongoose.connection
 
 //-- Model --//
 const WorkoutsSchema = new mongoose.Schema({
-    date: Date,
+    date: String,
     time: String,
     distance: String,
     drag: String
