@@ -44,7 +44,7 @@ app.get('/', (req, res) => {
 })
 
 // Index
-app.get('/workouts', auth, async (req, res) => {
+app.get('/workouts', async (req, res) => {          //-- , auth
     try {
         res.json(await Workouts.find({}))
     } catch (error) {
