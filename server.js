@@ -6,6 +6,8 @@ const app = express()
 const mongoose = require('mongoose')
 const cors = require('cors')
 const morgan = require('morgan')
+const AuthRouter = require("./controllers/user")
+const auth = require("./auth")
 
 //-- DB Connection --//
 mongoose.connect(MONGODB_URL, {
@@ -33,13 +35,16 @@ app.use(cors())
 app.use(morgan('dev'))
 app.use(express.json())
 
+//--- Routers --//
+app.use("/auth", AuthRouter)
+
 //-- Routes --//
 app.get('/', (req, res) => {
     res.send("Hello Garrett")
 })
 
 // Index
-app.get('/workouts', async (req, res) => {
+app.get('/workouts', auth, async (req, res) => {
     try {
         res.json(await Workouts.find({}))
     } catch (error) {
